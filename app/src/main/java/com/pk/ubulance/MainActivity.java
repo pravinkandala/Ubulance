@@ -1,30 +1,25 @@
 package com.pk.ubulance;
 
-import android.content.Intent;
+import android.content.Context;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
-import android.widget.Button;
-
-import butterknife.ButterKnife;
-import butterknife.OnClick;
+import android.view.View;
 
 public class MainActivity extends AppCompatActivity {
 
+    Context context;
+    MainActivity mainActivity;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        ButterKnife.bind(this);
-
+        context = this;
+        mainActivity = this;
     }
 
-    @OnClick(R.id.uberLoginBtn)
-    public void loginUber(Button button) {
-        Intent intent = new Intent(this, LoginAuth.class);
-        startActivity(intent);
-        finish();
+    public void getCost(View view) {
+        Api api  = new Api(context,"38.998725","-76.866995","38.992915","-76.873751",mainActivity);
+        api.uberCost();
     }
-
-
 }

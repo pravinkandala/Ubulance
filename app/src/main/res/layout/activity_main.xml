@@ -16,5 +16,6 @@
         android:layout_centerHorizontal="true"
         android:layout_centerVertical="true"
         android:text="Login Uber"
+        android:onClick="getCost"
         android:id="@+id/uberLoginBtn"/>
 </RelativeLayout>
