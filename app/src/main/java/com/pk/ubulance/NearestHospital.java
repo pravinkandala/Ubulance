@@ -1,40 +1,61 @@
 package com.pk.ubulance;
 
+import android.annotation.TargetApi;
+import android.app.Activity;
 import android.app.ListActivity;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.os.AsyncTask;
+import android.os.Build;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
-import android.widget.ArrayAdapter;
 import android.widget.ListView;
 
 import java.util.List;
 
 public class NearestHospital extends ListActivity {
 
-//    @Override
-//    protected void onCreate(Bundle savedInstanceState) {
-//        super.onCreate(savedInstanceState);
-//        setContentView(R.layout.activity_nearest_hospital);
-//    }
+    double longitude;
+    double latitude;
+    Activity activity;
+    ListView hostpitalListView;
 
     @Override
     protected void onCreate(Bundle arg0) {
         // TODO Auto-generated method stub
         super.onCreate(arg0);
 
+        activity = this;
+
+        hostpitalListView = (ListView) findViewById(R.id.hostpitalList);
+
+
+
+
+        GetLocation getLocation = new GetLocation(this);
+        if (getLocation.canGetLocation()) {
+            longitude = getLocation.getLongitude();
+            latitude = getLocation.getLatitude();
+            getLocation.showSettingsAlert();
+        } else {
+
+        }
+        Log.d("current location", "Long:" + longitude + ", Lat:" + latitude);
+
         new GetPlaces(this, getListView()).execute();
 
     }
 
 
-    class GetPlaces extends AsyncTask<Void, Void, Void> {
+
+
+    class GetPlaces extends AsyncTask<Void, Void, List<Place>> {
 
         private ProgressDialog dialog;
         private Context context;
         public String[] placeName;
-//        public String[] imageUrl;
+        //        public String[] imageUrl;
         private ListView listView;
 
         public GetPlaces(Context context, ListView listView) {
@@ -43,13 +64,21 @@ public class NearestHospital extends ListActivity {
             this.listView = listView;
         }
 
+
+        @TargetApi(Build.VERSION_CODES.N)
         @Override
-        protected void onPostExecute(Void result) {
+        protected void onPostExecute(List<Place> result) {
             // TODO Auto-generated method stub
             super.onPostExecute(result);
             dialog.dismiss();
+//            result.forEach(p -> {
+//                p.ge
+//            });
 
-            listView.setAdapter(new ArrayAdapter<String>(context, android.R.layout.simple_expandable_list_item_1,placeName));
+//            ArrayAdapter adapter = new ArrayAdapter<String>(this, R.layout.activity_nearest_hospital, result);
+
+//            hostpitalListView.setAdapter(adapter);
+//            listView.setAdapter(new ArrayAdapter<Place>(context, android.R.layout., result));
         }
 
         @Override
@@ -64,27 +93,10 @@ public class NearestHospital extends ListActivity {
         }
 
         @Override
-        protected Void doInBackground(Void... arg0) {
+        protected List<Place> doInBackground(Void... arg0) {
             // TODO Auto-generated method stub
-            PlacesService service = new PlacesService("AIzaSyALTe8k4x4hCdMFSJMA8nch92neAQ8i3Kk");
-            List<Place> findPlaces = service.findPlaces(38.998725,-76.866995,"hospital");  // hospiral for hospital
-            // atm for ATM
-
-            placeName = new String[findPlaces.size()];
-//            imageUrl = new String[findPlaces.size()];
-
-            for (int i = 0; i < findPlaces.size(); i++) {
-
-                Place placeDetail = findPlaces.get(i);
-                placeDetail.getIcon();
-
-                System.out.println("forty3"+placeDetail.getName());
-                placeName[i] =placeDetail.getName();
-
-//                imageUrl[i] =placeDetail.getIcon();
-
-            }
-            return null;
+            PlacesService service = new PlacesService(getString(R.string.googleToken));
+            return service.findPlaces(latitude, longitude, "hospital");  // hospital for hospital
         }
 
     }
@@ -92,6 +104,11 @@ public class NearestHospital extends ListActivity {
     @Override
     protected void onListItemClick(ListView l, View v, int position, long id) {
         super.onListItemClick(l, v, position, id);
+
+
+
+
+
 
     }
 }
