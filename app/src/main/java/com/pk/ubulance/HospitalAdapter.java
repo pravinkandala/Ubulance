@@ -47,6 +47,8 @@ public class HospitalAdapter extends ArrayAdapter<Place> {
                 Log.d("prav:","Lat"+place.getLatitude()+", Log:"+place.getLongitude());
 
                 Intent intent = new Intent(getContext(),GetProduct.class);
+                intent.putExtra("end_latitude",place.getLatitude());
+                intent.putExtra("end_longitude",place.getLongitude());
                 getContext().startActivity(intent);
 
             }
