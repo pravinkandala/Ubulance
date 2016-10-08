@@ -34,15 +34,13 @@ public class MainActivity extends AppCompatActivity {
                 .colorPressed(Color.WHITE) // pressed state color
                 .icon(R.drawable.plus_icon); // icon
 
-
-
     }
 
 
 
     public void goUbulance(View view) {
-        Api api  = new Api(context,"38.998725","-76.866995","38.992915","-76.873751",mainActivity);
-        api.uberCost();
+//        Api api  = new Api(context,"38.998725","-76.866995","38.992915","-76.873751",mainActivity);
+//        api.uberCost();
 
         ubulance.morph(circle);
 

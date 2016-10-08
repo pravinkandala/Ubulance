@@ -1,6 +1,7 @@
 package com.pk.ubulance;
 
 import android.content.Context;
+import android.content.Intent;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -44,6 +45,10 @@ public class HospitalAdapter extends ArrayAdapter<Place> {
             public void onClick(View view) {
                 //TODO: send this to uber call
                 Log.d("prav:","Lat"+place.getLatitude()+", Log:"+place.getLongitude());
+
+                Intent intent = new Intent(getContext(),GetProduct.class);
+                getContext().startActivity(intent);
+
             }
         });
 

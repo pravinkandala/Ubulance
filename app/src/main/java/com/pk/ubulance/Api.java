@@ -30,6 +30,7 @@ public class Api {
     String start_longitude;
     String end_latitude;
     String end_longitude;
+    String first_productID;
 
     HashMap<String, Integer> uberDurations = new LinkedHashMap<String, Integer>();
     HashMap<String, String> uberEstimates = new LinkedHashMap<String, String>();
@@ -52,12 +53,40 @@ public class Api {
         final String url = "https://api.uber.com/v1/estimates/price?start_latitude=" + start_latitude + "&start_longitude=" + start_longitude + "&end_latitude=" + end_latitude + "&end_longitude=" + end_longitude;
         // prepare the Request
         JsonObjectRequest getRequest = new JsonObjectRequest(Request.Method.GET, url, null,
+                response -> {
+                    // display response
+                    Log.d("Response", response.toString());
+                    parseStoreUberResponse(response);
+                },
+                error -> Log.d("Error.Response", error.toString())
+        ) {
+            public Map<String, String> getHeaders() {
+                Map<String, String> headers = new HashMap<String, String>();
+                headers.put("Authorization", "Token 31-LZaJskTZ94_it8e59TCOsZgbnRhZCGsBqIHvI");
+                return headers;
+            }
+        };
+
+        // add it to the RequestQueue
+        queue.add(getRequest);
+
+    }
+
+    public void getProductId() {
+        //Get request for uber api
+
+
+        RequestQueue queue = Volley.newRequestQueue(context);
+        final String url = "https://api.uber.com/v1/products?latitude="+start_latitude+"&longitude="+start_longitude;
+        // prepare the Request
+        JsonObjectRequest getRequest = new JsonObjectRequest(Request.Method.GET, url, null,
                 new Response.Listener<JSONObject>() {
                     @Override
                     public void onResponse(JSONObject response) {
                         // display response
                         Log.d("Response", response.toString());
-                        parseStoreUberResponse(response);
+                        first_productID = parseUberProductResponse(response);
+                        Log.d("getProd", first_productID);
                     }
                 },
                 new Response.ErrorListener() {
@@ -77,7 +106,27 @@ public class Api {
         // add it to the RequestQueue
         queue.add(getRequest);
 
+
     }
+
+    public String getFirst_productID(){
+        return first_productID;
+    }
+
+    public String parseUberProductResponse(JSONObject response) {
+        //parse and store JSON response from the Uber api
+        try {
+            JSONArray array = response.getJSONArray("products");
+            return array.getJSONObject(0).getString("product_id");
+        } catch (JSONException e) {
+            e.printStackTrace();
+            return null;
+        }
+
+    }
+
+
+
 
 
     public void parseStoreUberResponse(JSONObject response) {
