@@ -1,6 +1,7 @@
 package com.pk.ubulance;
 
 import android.content.Context;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -12,10 +13,6 @@ import com.squareup.picasso.Picasso;
 
 import java.util.List;
 
-/**
- * Created by Pravin on 10/7/16.
- * Project: Ubulance
- */
 
 public class HospitalAdapter extends ArrayAdapter<Place> {
 
@@ -41,6 +38,14 @@ public class HospitalAdapter extends ArrayAdapter<Place> {
         placeName.setText(place.getName());
         vicinity.setText(place.getVicinity());
         Picasso.with(getContext()).load(place.getIcon()).into(icon);
+
+        convertView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                //TODO: send this to uber call
+                Log.d("prav:","Lat"+place.getLatitude()+", Log:"+place.getLongitude());
+            }
+        });
 
         // Return the completed view to render on screen
         return convertView;

@@ -5,7 +5,7 @@ android {
     buildToolsVersion "24.0.0"
     defaultConfig {
         applicationId "com.pk.ubulance"
-        minSdkVersion 14
+        minSdkVersion 15
         targetSdkVersion 24
         versionCode 1
         versionName "1.0"
@@ -24,6 +24,10 @@ android {
         targetCompatibility 1.8
         sourceCompatibility 1.8
     }
+    repositories {
+        jcenter()
+        maven { url "https://jitpack.io" }
+    }
 }
 
 dependencies {
@@ -33,4 +37,7 @@ dependencies {
     compile 'com.android.volley:volley:1.0.0'
     compile 'com.squareup.picasso:picasso:2.5.2'
     compile 'com.github.castorflex.smoothprogressbar:library:1.1.0'
+    compile 'com.beardedhen:androidbootstrap:2.3.0'
+    compile 'com.mikhaellopez:circularfillableloaders:1.2.0'
+    compile 'com.github.dmytrodanylyk:android-morphing-button:98a4986e56'
 }

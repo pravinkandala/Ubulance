@@ -3,10 +3,12 @@
     <color name="colorPrimary">#3F51B5</color>
     <color name="colorPrimaryDark">#303F9F</color>
     <color name="colorAccent">#FF4081</color>
+    <color name="background">#A1FF3300</color>
     <string-array name="fourColors">
         <item>#FFEF5D</item>
         <item>#FF3303</item>
         <item>#3FA2FF</item>
         <item>#71FF4C</item>
     </string-array>
+
 </resources>

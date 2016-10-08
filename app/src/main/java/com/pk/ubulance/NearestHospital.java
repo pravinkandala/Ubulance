@@ -2,9 +2,11 @@ package com.pk.ubulance;
 
 import android.app.Activity;
 import android.content.Context;
+import android.content.Intent;
 import android.graphics.Color;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.view.View;
 import android.widget.ListView;
 
 import java.util.List;
@@ -17,7 +19,6 @@ public class NearestHospital extends Activity {
     double longitude;
     double latitude;
     ListView hostpitalListView;
-    List<Place> places;
     private SmoothProgressBar progressBar;
 
     @Override
@@ -41,7 +42,14 @@ public class NearestHospital extends Activity {
         new GetPlaces(this, hostpitalListView).execute();
     }
 
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
 
+        Intent intent = new Intent(this,MainActivity.class);
+        startActivity(intent);
+        finish();
+    }
 
     class GetPlaces extends AsyncTask<Void, Void, List<Place>> {
 
@@ -64,13 +72,15 @@ public class NearestHospital extends Activity {
             listView.setAdapter(adapter);
             int[] color = {Color.YELLOW,Color.RED,Color.BLUE,Color.GREEN};
             progressBar.setSmoothProgressDrawableColors(color);
-//            progressBar.progressiveStop();
+            progressBar.progressiveStop();
+            progressBar.setVisibility(View.INVISIBLE);
         }
 
         @Override
         protected void onPreExecute() {
             // TODO Auto-generated method stub
             super.onPreExecute();
+            progressBar.setVisibility(View.VISIBLE);
             progressBar.progressiveStart();
 
         }
@@ -81,6 +91,7 @@ public class NearestHospital extends Activity {
             PlacesService service = new PlacesService(getString(R.string.googleToken));
             return service.findPlaces(latitude, longitude, "hospital");  // hospital for hospital
         }
+
 
     }
 
