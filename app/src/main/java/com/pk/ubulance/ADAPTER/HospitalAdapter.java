@@ -35,7 +35,7 @@ public class HospitalAdapter extends ArrayAdapter<Place> {
         }
         // Lookup view for data population
         TextView placeName = (TextView) convertView.findViewById(R.id.placeNameTextView);
-        TextView vicinity = (TextView) convertView.findViewById(R.id.vicinityTextView);
+        TextView vicinity = (TextView) convertView.findViewById(R.id.vicinity_tv);
         ImageView icon = (ImageView) convertView.findViewById(R.id.icon);
 
         // Populate the data into the template view using the data object
@@ -52,6 +52,8 @@ public class HospitalAdapter extends ArrayAdapter<Place> {
                 Intent intent = new Intent(getContext(),DisplayDriverActivity.class);
                 intent.putExtra("end_latitude",place.getLatitude());
                 intent.putExtra("end_longitude",place.getLongitude());
+                intent.putExtra("vicinity",place.getVicinity());
+                Log.d("vicinity","vicinity"+place.getVicinity());
                 getContext().startActivity(intent);
 
             }

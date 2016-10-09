@@ -25,7 +25,7 @@ public class IntroActivity extends MaterialIntroActivity {
 
 
         addSlide(new SlideFragmentBuilder()
-                        .backgroundColor(R.color.colorPrimary)
+                        .backgroundColor(R.color.colorPrimaryDark)
                         .buttonsColor(R.color.colorAccent)
                         .possiblePermissions(new String[]{Manifest.permission.CALL_PHONE, Manifest.permission.ACCESS_COARSE_LOCATION})
                         .neededPermissions(new String[]{Manifest.permission.ACCESS_FINE_LOCATION, Manifest.permission.INTERNET})
@@ -40,7 +40,7 @@ public class IntroActivity extends MaterialIntroActivity {
                             public void run() {
                                 try {
                                     sleep(SPLASH_DISPLAY_LENGTH);
-                                    Intent main = new Intent(IntroActivity.this, HospitalAcitivity.class);
+                                    Intent main = new Intent(IntroActivity.this, HospitalActivity.class);
                                     startActivity(main);
                                 } catch (Exception e) {
                                     e.printStackTrace();

@@ -19,7 +19,7 @@ import java.util.List;
 import fr.castorflex.android.smoothprogressbar.SmoothProgressBar;
 
 
-public class HospitalAcitivity extends Activity {
+public class HospitalActivity extends Activity {
 
     double longitude;
     double latitude;
@@ -72,8 +72,6 @@ public class HospitalAcitivity extends Activity {
 
             HospitalAdapter adapter = new HospitalAdapter(context,result);
             listView.setAdapter(adapter);
-            int[] color = {Color.YELLOW,Color.RED,Color.BLUE,Color.GREEN};
-            progressBar.setSmoothProgressDrawableColors(color);
             progressBar.progressiveStop();
             progressBar.setVisibility(View.INVISIBLE);
         }
@@ -83,6 +81,8 @@ public class HospitalAcitivity extends Activity {
             // TODO Auto-generated method stub
             super.onPreExecute();
             progressBar.setVisibility(View.VISIBLE);
+            int[] color = {Color.YELLOW,Color.RED,Color.BLUE,Color.GREEN};
+            progressBar.setSmoothProgressDrawableColors(color);
             progressBar.progressiveStart();
 
         }

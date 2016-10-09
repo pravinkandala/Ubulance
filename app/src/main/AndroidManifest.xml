@@ -15,14 +15,14 @@
         android:theme="@style/AppTheme">
         <activity
             android:name=".Activity.IntroActivity"
-            android:theme="@style/Theme.Intro">
+            android:theme="@style/Theme.AppCompat.DayNight.NoActionBar">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".Activity.HospitalAcitivity" />
+        <activity android:name=".Activity.HospitalActivity" />
         <activity android:name=".Activity.DisplayDriverActivity"></activity>
     </application>
 
