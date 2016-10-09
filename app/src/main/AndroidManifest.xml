@@ -2,6 +2,7 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.pk.ubulance">
 
+    <uses-permission android:name="android.permission.CALL_PHONE" />
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
 
@@ -13,7 +14,7 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity
-            android:name=".Splash"
+            android:name=".Activity.IntroActivity"
             android:theme="@style/Theme.AppCompat.DayNight.NoActionBar">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -21,9 +22,9 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".NearestHospital" />
-        <activity android:name=".MainActivity" />
-        <activity android:name=".GetProduct"></activity>
+        <activity android:name=".Activity.HospitalAcitivity" />
+        <activity android:name=".Activity.MainActivity" />
+        <activity android:name=".Activity.DisplayDriverActivity"></activity>
     </application>
 
 </manifest>

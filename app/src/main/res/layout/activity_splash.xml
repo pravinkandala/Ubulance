@@ -6,7 +6,7 @@
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
     android:background="@color/background"
-    tools:context="com.pk.ubulance.Splash">
+    tools:context="com.pk.ubulance.Activity.IntroActivity">
 
     <com.mikhaellopez.circularfillableloaders.CircularFillableLoaders
         android:id="@+id/circularFillableLoaders"

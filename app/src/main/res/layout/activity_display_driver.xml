@@ -1,0 +1,118 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/activity_get_product"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.pk.ubulance.Activity.DisplayDriverActivity">
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Driver Details"
+        android:layout_margin="20dp"
+        android:textSize="32dp"
+        android:gravity="center"
+        android:id="@+id/lable"/>
+
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:id="@+id/nameplate"
+        android:layout_below="@+id/lable">
+
+
+    <ImageView
+        android:id="@+id/driver_image"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:layout_marginLeft="20dp"
+        android:layout_marginTop="16dp"
+        android:background="@drawable/hospital_icon" />
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="10dp"
+        android:layout_marginLeft="20dp"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/driver_name_tv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:layout_marginTop="16dp"
+            android:text="Driver Name"
+            android:textColor="#000" />
+
+        <TextView
+            android:id="@+id/driver_phone_tv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginRight="10dp"
+            android:text="Phone: (999) 999 - 111"
+            android:onClick="makeCall"
+            android:clickable="true"
+            android:textColor="#6F000000" />
+
+        <TextView
+            android:id="@+id/driver_rating_tv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Rating: 4.5"/>
+
+    </LinearLayout>
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:padding="20dp"
+        android:layout_below="@id/nameplate">
+
+        <TextView
+            android:id="@+id/status_tv"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Status: Accepted"/>
+
+        <TextView
+            android:id="@+id/eta_tv"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="ETA: 1"/>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Vehicle Details:"
+            android:textSize="20sp"/>
+
+        <TextView
+            android:id="@+id/vehicle_make_tv"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Make"/>
+
+        <TextView
+            android:id="@+id/vehicle_model_tv"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Model:"/>
+
+        <TextView
+            android:id="@+id/vehicle_plate_tv"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Licence Plate"/>
+
+
+
+
+    </LinearLayout>
+
+</RelativeLayout>

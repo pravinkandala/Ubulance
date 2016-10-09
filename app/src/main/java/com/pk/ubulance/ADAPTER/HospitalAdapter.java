@@ -1,4 +1,4 @@
-package com.pk.ubulance;
+package com.pk.ubulance.Adapter;
 
 import android.content.Context;
 import android.content.Intent;
@@ -10,6 +10,9 @@ import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.pk.ubulance.Activity.DisplayDriverActivity;
+import com.pk.ubulance.Model.Place;
+import com.pk.ubulance.R;
 import com.squareup.picasso.Picasso;
 
 import java.util.List;
@@ -46,7 +49,7 @@ public class HospitalAdapter extends ArrayAdapter<Place> {
                 //TODO: send this to uber call
                 Log.d("prav:","Lat"+place.getLatitude()+", Log:"+place.getLongitude());
 
-                Intent intent = new Intent(getContext(),GetProduct.class);
+                Intent intent = new Intent(getContext(),DisplayDriverActivity.class);
                 intent.putExtra("end_latitude",place.getLatitude());
                 intent.putExtra("end_longitude",place.getLongitude());
                 getContext().startActivity(intent);

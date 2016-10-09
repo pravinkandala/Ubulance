@@ -1,4 +1,4 @@
-package com.pk.ubulance;
+package com.pk.ubulance.Activity;
 
 import android.content.Context;
 import android.content.Intent;
@@ -9,6 +9,7 @@ import android.view.View;
 
 import com.beardedhen.androidbootstrap.TypefaceProvider;
 import com.dd.morphingbutton.MorphingButton;
+import com.pk.ubulance.R;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -39,7 +40,7 @@ public class MainActivity extends AppCompatActivity {
 
 
     public void goUbulance(View view) {
-//        Api api  = new Api(context,"38.998725","-76.866995","38.992915","-76.873751",mainActivity);
+//        UberAPI api  = new UberAPI(context,"38.998725","-76.866995","38.992915","-76.873751",mainActivity);
 //        api.uberCost();
 
         ubulance.morph(circle);
@@ -48,7 +49,7 @@ public class MainActivity extends AppCompatActivity {
             public void run() {
                 try {
                     sleep(1000);
-                    Intent intent = new Intent(MainActivity.this, NearestHospital.class);
+                    Intent intent = new Intent(MainActivity.this, HospitalAcitivity.class);
                     startActivity(intent);
                 } catch (Exception e) {
                     e.printStackTrace();

@@ -1,4 +1,4 @@
-package com.pk.ubulance;
+package com.pk.ubulance.Activity;
 
 import android.app.Activity;
 import android.content.Context;
@@ -9,12 +9,18 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.ListView;
 
+import com.pk.ubulance.Adapter.HospitalAdapter;
+import com.pk.ubulance.Model.Place;
+import com.pk.ubulance.R;
+import com.pk.ubulance.Service.GetLocation;
+import com.pk.ubulance.Service.PlacesService;
+
 import java.util.List;
 
 import fr.castorflex.android.smoothprogressbar.SmoothProgressBar;
 
 
-public class NearestHospital extends Activity {
+public class HospitalAcitivity extends Activity {
 
     double longitude;
     double latitude;
@@ -24,7 +30,7 @@ public class NearestHospital extends Activity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_nearest_hospital);
+        setContentView(R.layout.activity_hospital);
 
         progressBar = (SmoothProgressBar) findViewById(R.id.progressBar);
         hostpitalListView = (ListView) findViewById(R.id.hostpitalList);

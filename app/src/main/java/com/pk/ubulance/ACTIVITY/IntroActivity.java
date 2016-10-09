@@ -1,10 +1,12 @@
-package com.pk.ubulance;
+package com.pk.ubulance.Activity;
 
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 
-public class Splash extends Activity {
+import com.pk.ubulance.R;
+
+public class IntroActivity extends Activity {
 
     /**
      * Duration of wait
@@ -21,7 +23,7 @@ public class Splash extends Activity {
             public void run() {
                 try {
                     sleep(SPLASH_DISPLAY_LENGTH);
-                    Intent main = new Intent(Splash.this, MainActivity.class);
+                    Intent main = new Intent(IntroActivity.this, MainActivity.class);
                     startActivity(main);
                 } catch (Exception e) {
                     e.printStackTrace();

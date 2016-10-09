@@ -1,4 +1,4 @@
-package com.pk.ubulance;
+package com.pk.ubulance.Model;
 
 import org.json.JSONException;
 

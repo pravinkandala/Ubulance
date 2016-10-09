@@ -1,6 +1,8 @@
-package com.pk.ubulance;
+package com.pk.ubulance.Service;
 
 import android.util.Log;
+
+import com.pk.ubulance.Model.Place;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -44,7 +46,7 @@ public class PlacesService {
             ArrayList<Place> arrayList = new ArrayList<Place>();
             for (int i = 0; i < array.length(); i++) {
                 try {
-                    Place place = Place.jsonToPontoReferencia((JSONObject) array.get(i));
+                    Place place = Place.jsonPlaceReference((JSONObject) array.get(i));
 
                     Log.v("Places Services ", ""+place);
 
