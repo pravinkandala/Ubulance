@@ -3,6 +3,7 @@ package com.pk.ubulance;
 import android.content.Context;
 import android.util.Log;
 
+import com.android.volley.NetworkResponse;
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
@@ -20,6 +21,7 @@ import java.util.LinkedHashMap;
 import java.util.Map;
 
 import static com.android.volley.Request.Method.GET;
+import static com.android.volley.Request.Method.POST;
 import static com.android.volley.Request.Method.PUT;
 
 /**
@@ -77,24 +79,29 @@ public class Api {
     }
 
 
-    public void fetchSynchronously(Context c, String url, int method, JSONObject params, final ServerCallBack callback) {
+    public void fetchSynchronously(RequestQueue que, String url, int method, JSONObject params, final ServerCallBack callback) {
 
-        String tag = "pk43";
+        String tag = "CALL_UBULANCE";
+        Log.d(tag, "Url : " + url);
+        Log.d(tag, "Method : " + method);
+        if(params != null) Log.d(tag, "Params : " + params.toString());
         JsonObjectRequest jsonObjectRequest = new JsonObjectRequest
                 (method, url, params, new Response.Listener<JSONObject>() {
                     @Override
                     public void onResponse(JSONObject response) {
-                        Log.d(tag, response.toString());
+                        Log.d(tag, "Response : " + response.toString());
 
                         try {
                             callback.onSuccess(response);
                         } catch (JSONException e) {
+                            Log.d(tag, "JSONException : " + e.getMessage());
                             Log.e(tag, e.getMessage(), e);
                         }
                     }
                 }, new Response.ErrorListener() {
                     @Override
                     public void onErrorResponse(VolleyError error) {
+                        Log.d(tag, "Error : " + error.getMessage());
                         VolleyLog.d(tag, "Error: " + error.getMessage());
                     }
                 }) {
@@ -104,12 +111,21 @@ public class Api {
                 headers.put("Authorization", "Bearer eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJzY29wZXMiOlsicmVxdWVzdCJdLCJzdWIiOiI5ZjRmYjZmZS1kYjBkLTRjZTAtOGMzNC1mYmFhZTlhMzczZjYiLCJpc3MiOiJ1YmVyLXVzMSIsImp0aSI6Ijg5MWIzOGE4LTkzMjgtNDI5ZC1iOTNkLWE4ZTJlNjIzYTVmNSIsImV4cCI6MTQ3ODU0MDA4NywiaWF0IjoxNDc1OTQ4MDg3LCJ1YWN0IjoiR1dJb2xBS2VYQ1l4c2FuVVNhdHlORHFVZWpXc2pyIiwibmJmIjoxNDc1OTQ3OTk3LCJhdWQiOiJucFk5UVpkUWN3Y3JwNHVJYXp4dktZY25EbHZjbVhZeSJ9.jWrj8FkSo5nWNPBapXqLzPUMPgWDEwYn86xGQPQuozIPu1RNfE7jnRYLr9jEwpRmVeKuwI8d1eeG2Ci2EWLlC9IxjdQhFXjJgfFHzREv9BrNubVToUVOSOL_ARMeffoB6gB6mYQyDuZL7SulHT1tduBX4NIIuTSBVZ3dUvtMhPEvIZ1H2tOqRMAguSeLWyGl90l5Fd5hSntnPAab-GI6XyoF4OiVKk6fPpl8ejZEcsdTsmRbdhl5UP_Sq-G5il2V_UAvCa-JY-5y52Yy1htunTtnnqOTqHRJ335no36WnE2D3U1HNXXER86GAJZslOAaK3TSqtItNU7YNQ3Nv2jLRw");
                 return headers;
             }
+            @Override
+            protected Response<JSONObject> parseNetworkResponse(NetworkResponse response) {
+                if (response != null && response.data.length == 0)
+                    return Response.success(new JSONObject(), null);
+                else
+                    return super.parseNetworkResponse(response);
+            }
         };
 
-        NetworkController.getInstance().setRequestContext(c).addToRequestQueue(jsonObjectRequest);
+//        NetworkController.getInstance().setRequestContext(c).addToRequestQueue(jsonObjectRequest);
+        que.add(jsonObjectRequest);
     }
 
     public void callUbulance(Context c) throws JSONException {
+        RequestQueue queue = Volley.newRequestQueue(c);
         final String postUrl = "https://sandbox-api.uber.com/v1/requests";
         final String getUrl = "https://sandbox-api.uber.com/v1/requests/";
         final String putUrl = "https://sandbox-api.uber.com/v1/sandbox/requests/";
@@ -125,48 +141,51 @@ public class Api {
         JSONObject putJson = new JSONObject();
         putJson.put("status", "accepted");
 
-        fetchSynchronously(c, postUrl, Request.Method.POST, postJson, new ServerCallBack() {
+        ServerCallBack getDriverDetails = new ServerCallBack() {
             @Override
             public void onSuccess(Object result) throws JSONException {
-                final JSONObject json = (JSONObject) result;
-                requestId[0] = ((String) json.get("request_id"));
-                Log.d("abhishek", "on post success, reqid:" + requestId[0]);
+                final JSONObject finalResult = (JSONObject) result;
+                Log.d("CALL_UBULANCE", "[SUCCESS] Final Result : " + finalResult.toString());
+//                Log.d("CALL_UBULANCE", "{SUCCESS} == ==");
             }
 
             @Override
             public void onFailure(Boolean bool) {
-
+                Log.d("CALL_UBULANCE", "[FAILED] getDriverDetails");
             }
-        });
+        };
 
-        Log.d("abhishek","before put"+requestId[0]);
-
-        fetchSynchronously(c, putUrl + requestId[0], PUT, putJson, new ServerCallBack() {
+        ServerCallBack callGetReq = new ServerCallBack() {
             @Override
             public void onSuccess(Object result) throws JSONException {
-                // do some logging her
-                Log.d("abhishek", "on put success");
+                Log.d("CALL_UBULANCE", "Calling get request to get driver details");
+                fetchSynchronously(queue, getUrl + requestId[0], GET, null, getDriverDetails);
             }
 
             @Override
             public void onFailure(Boolean bool) {
-                Log.d("abhishek", "on put failed");
+                Log.d("CALL_UBULANCE", "[FAILED] callGetReq");
             }
-        });
+        };
 
-        fetchSynchronously(c, getUrl + requestId[0], GET, null, new ServerCallBack() {
+        ServerCallBack getProductIdAndSendPutReq = new ServerCallBack() {
             @Override
             public void onSuccess(Object result) throws JSONException {
-                // do logging
-                JSONObject json = ((JSONObject) result);
-                Log.d("driverdetails", json.toString());
+                final JSONObject postResponse = (JSONObject) result;
+                requestId[0] = ((String) postResponse.get("request_id"));
+                Log.d("CALL_UBULANCE", "Received Request Id : " + requestId[0]);
+                Log.d("CALL_UBULANCE", "Now Send PUT Request to change the status");
+                // send put request
+                fetchSynchronously(queue, putUrl + requestId[0], PUT, putJson, callGetReq);
             }
 
             @Override
             public void onFailure(Boolean bool) {
-                Log.d("driver", "failed");
+                Log.d("CALL_UBULANCE", "[FAILED] getProductIdAndSendPutReq");
             }
-        });
+        };
+
+        fetchSynchronously(queue, postUrl, POST, postJson, getProductIdAndSendPutReq);
     }
 
     public void getProductId(Context context, String latitude, String longitude, final ServerCallBack callback) {
