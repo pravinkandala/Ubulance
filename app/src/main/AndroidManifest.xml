@@ -15,7 +15,7 @@
         android:theme="@style/AppTheme">
         <activity
             android:name=".Activity.IntroActivity"
-            android:theme="@style/Theme.AppCompat.DayNight.NoActionBar">
+            android:theme="@style/Theme.Intro">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -23,7 +23,6 @@
             </intent-filter>
         </activity>
         <activity android:name=".Activity.HospitalAcitivity" />
-        <activity android:name=".Activity.MainActivity" />
         <activity android:name=".Activity.DisplayDriverActivity"></activity>
     </application>
 

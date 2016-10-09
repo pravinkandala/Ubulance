@@ -40,4 +40,5 @@ dependencies {
     compile 'com.beardedhen:androidbootstrap:2.3.0'
     compile 'com.mikhaellopez:circularfillableloaders:1.2.0'
     compile 'com.github.dmytrodanylyk:android-morphing-button:98a4986e56'
+    compile 'agency.tango.android:material-intro-screen:0.0.3'
 }

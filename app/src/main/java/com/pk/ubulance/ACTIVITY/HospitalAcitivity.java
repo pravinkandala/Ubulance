@@ -2,7 +2,6 @@ package com.pk.ubulance.Activity;
 
 import android.app.Activity;
 import android.content.Context;
-import android.content.Intent;
 import android.graphics.Color;
 import android.os.AsyncTask;
 import android.os.Bundle;
@@ -51,9 +50,6 @@ public class HospitalAcitivity extends Activity {
     @Override
     public void onBackPressed() {
         super.onBackPressed();
-
-        Intent intent = new Intent(this,MainActivity.class);
-        startActivity(intent);
         finish();
     }
 
