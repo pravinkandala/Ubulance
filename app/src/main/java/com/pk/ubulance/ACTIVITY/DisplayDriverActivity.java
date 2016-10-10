@@ -1,13 +1,19 @@
 package com.pk.ubulance.Activity;
 
+import android.Manifest;
 import android.content.Context;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
+import android.location.Address;
+import android.location.Geocoder;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.design.widget.CoordinatorLayout;
 import android.support.design.widget.Snackbar;
+import android.support.v4.app.ActivityCompat;
 import android.support.v4.graphics.drawable.RoundedBitmapDrawable;
 import android.support.v4.graphics.drawable.RoundedBitmapDrawableFactory;
 import android.support.v7.app.AppCompatActivity;
@@ -15,6 +21,7 @@ import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageView;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
@@ -26,6 +33,10 @@ import com.pk.ubulance.Service.GetLocation;
 
 import org.json.JSONException;
 import org.json.JSONObject;
+
+import java.io.IOException;
+import java.util.List;
+import java.util.Locale;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -57,41 +68,52 @@ public class DisplayDriverActivity extends AppCompatActivity {
     TextView mVehicleModelTV;
     @BindView(R.id.vehicle_plate_tv)
     TextView mVehiclePlateTV;
+    @BindView(R.id.user_address_tv)
+    TextView mUserAddressTV;
     @BindView(R.id.hospital_address_tv)
     TextView mHospitalAddressTV;
     @BindView(R.id.driver_phone_tv)
     TextView mDriverPhoneTV;
     @BindView(R.id.toggle_iv)
     ImageView mToggleIV;
+    @BindView(R.id.call_driver_rlayout)
+    RelativeLayout mCallDriver;
+    @BindView(R.id.show_hospital_location_rlayout)
+    RelativeLayout mShowHospitalLocation;
+    @BindView(R.id.show_user_location_rlayout)
+    RelativeLayout mShowUserLocation;
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        ButterKnife.bind(this);
         setContentView(R.layout.activity_display_driver);
+        ButterKnife.bind(this);
         mContext = this;
 
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         mCoordinatorLayout = (CoordinatorLayout) findViewById(R.id.activity_driver_screen);
 
 //        callIntent = new Intent(Intent.ACTION_CALL);
-        mDriverNameTV = ((TextView) findViewById(R.id.driver_name_tv));
-        mDriverPhoneTV = ((TextView) findViewById(R.id.driver_phone_tv));
-        mDriverRatingTV = ((TextView) findViewById(R.id.driver_rating_tv));
-        mStatusTV = ((TextView) findViewById(R.id.status_tv));
-        mEtaTV = ((TextView) findViewById(R.id.eta_tv));
-        mVehicleMakeTV = ((TextView) findViewById(R.id.vehicle_make_tv));
-        mVehicleModelTV = ((TextView) findViewById(R.id.vehicle_model_tv));
-        mVehiclePlateTV = ((TextView) findViewById(R.id.vehicle_plate_tv));
-        mHospitalAddressTV = (TextView) findViewById(R.id.hospital_address_tv);
-        mToggleIV = ((ImageView) findViewById(R.id.toggle_iv));
 
 
         GetLocation getLocation = new GetLocation(this);
         if (getLocation.canGetLocation()) {
             mStartLatitude = Double.toString(getLocation.getLatitude());
             mStartLongitude = Double.toString(getLocation.getLongitude());
+            mUserAddressTV.setText(getLocationName(mContext, getLocation.getLatitude(), getLocation.getLongitude()));
+            mShowUserLocation.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    String strUri = "http://maps.google.com/maps?q=loc:" + getLocation.getLatitude() + "," + getLocation.getLongitude() + " (" + "You are here" + ")";
+                    Intent intent = new Intent(android.content.Intent.ACTION_VIEW, Uri.parse(strUri));
+
+                    intent.setClassName("com.google.android.apps.maps", "com.google.android.maps.MapsActivity");
+
+                    startActivity(intent);
+                }
+            });
+
         } else {
             getLocation.showSettingsAlert();
         }
@@ -100,11 +122,25 @@ public class DisplayDriverActivity extends AppCompatActivity {
         Double mEndLatitude = intent.getDoubleExtra("mEndLatitude", 0.0);
         Double mEndLongitude = intent.getDoubleExtra("mEndLongitude", 0.0);
         mHospitalAddressTV.setText(intent.getStringExtra("vicinity"));
+        mShowHospitalLocation.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                String strUri = "http://maps.google.com/maps?q=" + mHospitalAddressTV.getText().toString() + " (" + "Hospital" + ")";
+                Intent intent = new Intent(android.content.Intent.ACTION_VIEW, Uri.parse(strUri));
+
+                intent.setClassName("com.google.android.apps.maps", "com.google.android.maps.MapsActivity");
+
+                startActivity(intent);
+            }
+        });
+
 
         if (mEndLatitude != 0.0 || mEndLongitude != 0.0) {
             this.mEndLatitude = Double.toString(mEndLatitude);
             this.mEndLongitude = Double.toString(mEndLongitude);
+
         }
+
 
         if (isNetworkAvailable()) {
             UberAPI uberAPI = new UberAPI();
@@ -133,9 +169,34 @@ public class DisplayDriverActivity extends AppCompatActivity {
                         mDriverNameTV.setText("Driver: " + driver.getString("name"));
                         mDriverPhoneTV.setVisibility(View.VISIBLE);
                         mDriverPhoneTV.setText("Call: " + driver.getString("phone_number"));
+                        mCallDriver.setOnClickListener(new View.OnClickListener() {
+                            @Override
+                            public void onClick(View view) {
+                                Intent intent = new Intent(Intent.ACTION_CALL);
+                                try {
+                                    intent.setData(Uri.parse("tel:" + driver.getString("phone_number")));
+                                } catch (JSONException e) {
+                                    e.printStackTrace();
+                                }
+                                if (ActivityCompat.checkSelfPermission(getApplicationContext(), Manifest.permission.CALL_PHONE) != PackageManager.PERMISSION_GRANTED) {
+                                    // TODO: Consider calling
+                                    //    ActivityCompat#requestPermissions
+                                    // here to request the missing permissions, and then overriding
+                                    //   public void onRequestPermissionsResult(int requestCode, String[] permissions,
+                                    //                                          int[] grantResults)
+                                    // to handle the case where the user grants the permission. See the documentation
+                                    // for ActivityCompat#requestPermissions for more details.
+                                    return;
+                                }
+                                startActivity(intent);
+                            }
+                        });
+
+                        mDriverRatingTV.setText("Rating: " + driver.getString("rating"));
 
                         final JSONObject vehicle = finalResult.getJSONObject("vehicle");
                         displayDriverImage(mContext, driver.getString("picture_url"));
+
 
                         mToggleIV.setOnClickListener(new View.OnClickListener() {
                             Boolean toggle = true;
@@ -181,6 +242,23 @@ public class DisplayDriverActivity extends AppCompatActivity {
         }
 
 
+    }
+
+    public String getLocationName(Context mContext, Double latitude, Double longitude){
+        Geocoder myLocation = new Geocoder(mContext, Locale.getDefault());
+        List<Address> myList = null;
+        try {
+            myList = myLocation.getFromLocation(latitude,longitude, 1);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        Address address = (Address) myList.get(0);
+        String addressStr = "";
+        addressStr += address.getAddressLine(0) + ", ";
+        addressStr += address.getAddressLine(1) + ", ";
+        addressStr += address.getAddressLine(2);
+        Log.d("Ubulance", "Your Location: "+addressStr);
+        return addressStr;
     }
 
     public void displayDriverImage(Context mContext, String mUrl) {

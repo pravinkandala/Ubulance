@@ -24,19 +24,19 @@ public class IntroActivity extends MaterialIntroActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        final SlideFragmentBuilder slideFragmentBuilder = new SlideFragmentBuilder()
+        final SlideFragmentBuilder mSlideFragmentBuilder = new SlideFragmentBuilder()
                 .backgroundColor(R.color.colorPrimaryDark)
                 .buttonsColor(R.color.background);
         if(Build.VERSION.SDK_INT >= 23)
-            slideFragmentBuilder
+            mSlideFragmentBuilder
                     .possiblePermissions(new String[]{Manifest.permission.CALL_PHONE, Manifest.permission.ACCESS_COARSE_LOCATION})
                     .neededPermissions(new String[]{Manifest.permission.ACCESS_FINE_LOCATION, Manifest.permission.INTERNET});
-        final SlideFragment slider = slideFragmentBuilder
+        final SlideFragment mSlider = mSlideFragmentBuilder
                 .image(R.drawable.ic_ubulance_intro)
                 .title("One touch ride to the hospital")
                 .description("Disclaimer: If it's real emergency, call 911 ")
                 .build();
-        addSlide(slider, new MessageButtonBehaviour(new View.OnClickListener() {
+        addSlide(mSlider, new MessageButtonBehaviour(new View.OnClickListener() {
                             @Override
                             public void onClick(View v) {
                                 Thread loading = new Thread() {

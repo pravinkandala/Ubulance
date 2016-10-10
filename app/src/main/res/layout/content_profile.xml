@@ -15,6 +15,7 @@
         android:orientation="vertical">
 
         <RelativeLayout
+            android:id="@+id/call_driver_rlayout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:padding="@dimen/activity_horizontal_margin"
@@ -139,6 +140,7 @@
         <include layout="@layout/item_divider" />
 
         <RelativeLayout
+            android:id="@+id/show_hospital_location_rlayout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:padding="@dimen/activity_horizontal_margin"
@@ -163,7 +165,7 @@
                 android:layout_marginStart="@dimen/activity_horizontal_margin"
                 android:layout_toEndOf="@id/ivContactItem5"
                 android:ellipsize="end"
-                android:maxLines="1"
+                android:maxLines="2"
                 android:textAppearance="@style/TextAppearance.AppCompat.Medium"
                 android:layout_marginLeft="@dimen/activity_horizontal_margin"
                 android:layout_toRightOf="@id/ivContactItem5" />
@@ -184,6 +186,7 @@
         </RelativeLayout>
 
         <RelativeLayout
+            android:id="@+id/show_user_location_rlayout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="?attr/selectableItemBackground"
@@ -200,7 +203,7 @@
                 android:src="@drawable/ic_location_on_black"/>
 
             <TextView
-                android:id="@+id/user_location"
+                android:id="@+id/user_address_tv"
                 android:text="Your location goes here"
                 android:textColor="#212121"
                 android:layout_width="wrap_content"
@@ -209,7 +212,7 @@
                 android:layout_toEndOf="@id/ivContactItem6"
                 android:layout_toRightOf="@id/ivContactItem6"
                 android:ellipsize="end"
-                android:maxLines="1"
+                android:maxLines="2"
                 android:layout_marginLeft="@dimen/activity_horizontal_margin"
                 android:textAppearance="@style/TextAppearance.AppCompat.Medium"/>
 
@@ -218,7 +221,7 @@
                 android:textColor="#727272"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_below="@id/user_location"
+                android:layout_below="@id/user_address_tv"
                 android:layout_marginStart="@dimen/activity_horizontal_margin"
                 android:layout_marginTop="8dp"
                 android:layout_toEndOf="@id/ivContactItem6"
