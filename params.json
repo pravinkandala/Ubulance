@@ -1,0 +1,6 @@
+{
+  "name": "Ubulance",
+  "tagline": "The Uber Ambulance",
+  "body": "# Ubulance - The Uber Ambulance\r\n\r\nIn an Emergency, Ambulance can sometimes take 20mins to reach you, but there is probably an Uber right around you.\r\n\r\nBy ordering an uber from ubulance, driver will directly take you to the hospital near you.\r\n\r\n###Android Studio Settings\r\n```\r\nAndroid Studio 2.2\r\nBuild #AI-145.3276617, built on September 15, 2016\r\nJRE: 1.8.0_76-release-b03 x86_64\r\nJVM: OpenJDK 64-Bit Server VM by JetBrains s.r.o\r\n```\r\n\r\nWorks on Android Sdk Version - 15 to 24\r\n\r\n\r\n## Screen Shots\r\n<img src=\"https://raw.github.com/pravinkandala/Ubulance/master/Screens/Screen1.jpg\" width=\"180\" />\r\n\r\n\r\n<img src=\"https://raw.github.com/pravinkandala/Ubulance/master/Screens/Screen2.jpg\" width=\"180\" />\r\n\r\n\r\n<img src=\"https://raw.github.com/pravinkandala/Ubulance/master/Screens/Screen3.jpg\" width=\"180\" />\r\n\r\n\r\n## Idea\r\n\r\n[![Ubulance - Jimmy Kimmel](https://img.youtube.com/vi/uyeJE2vMSLE/0.jpg)](https://www.youtube.com/watch?v=uyeJE2vMSLE)\r\n\r\nand similar ios application by [UberEmergency - Khaptonstall](https://github.com/khaptonstall/UberEmergency)\r\n\r\n\r\n",
+  "note": "Don't delete this file! It's used internally to help with page regeneration."
+}
