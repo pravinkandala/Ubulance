@@ -19,10 +19,10 @@ Works on Android Sdk Version - 15 to 24
 <img src="https://raw.github.com/pravinkandala/Ubulance/master/Screens/Screen1.jpg" width="180" />
 
 
-<img src="https://raw.github.com/pravinkandala/Ubulance/master/Screens/Screen2.png" width="180" />
+<img src="https://raw.github.com/pravinkandala/Ubulance/master/Screens/Screen2.jpg" width="180" />
 
 
-<img src="https://raw.github.com/pravinkandala/Ubulance/master/Screens/Screen3.png" width="180" />
+<img src="https://raw.github.com/pravinkandala/Ubulance/master/Screens/Screen3.jpg" width="180" />
 
 
 ## Idea
