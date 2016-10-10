@@ -26,20 +26,20 @@ import static com.android.volley.Request.Method.PUT;
 public class UberAPI {
 
 
-    public void fetchSynchronously(RequestQueue que, String url, int method, JSONObject params, final ServerCallBack callback) {
+    public void fetchSynchronously(RequestQueue mRequestQueue, String mUrl, int mMethod, JSONObject mParams, final ServerCallBack mCallback) {
 
         String tag = "CALL_UBULANCE";
-        Log.d(tag, "Url : " + url);
-        Log.d(tag, "Method : " + method);
-        if(params != null) Log.d(tag, "Params : " + params.toString());
+        Log.d(tag, "Url : " + mUrl);
+        Log.d(tag, "Method : " + mMethod);
+        if(mParams != null) Log.d(tag, "Params : " + mParams.toString());
         JsonObjectRequest jsonObjectRequest = new JsonObjectRequest
-                (method, url, params, new Response.Listener<JSONObject>() {
+                (mMethod, mUrl, mParams, new Response.Listener<JSONObject>() {
                     @Override
                     public void onResponse(JSONObject response) {
                         Log.d(tag, "Response : " + response.toString());
 
                         try {
-                            callback.onSuccess(response);
+                            mCallback.onSuccess(response);
                         } catch (JSONException e) {
                             Log.d(tag, "JSONException : " + e.getMessage());
                             Log.e(tag, e.getMessage(), e);
@@ -68,11 +68,11 @@ public class UberAPI {
         };
 
 //        NetworkController.getInstance().setRequestContext(c).addToRequestQueue(jsonObjectRequest);
-        que.add(jsonObjectRequest);
+        mRequestQueue.add(jsonObjectRequest);
     }
 
-    public void callUbulance(Context c, String start_latitude, String start_longitude, String end_latitude, String end_longitude, ServerCallBack callBack) throws JSONException {
-        RequestQueue queue = Volley.newRequestQueue(c);
+    public void callUbulance(Context mContext, String mStartLatitude, String mStartLongitude, String mEndLatitude, String mEndLongitude, ServerCallBack mCallback) throws JSONException {
+        RequestQueue queue = Volley.newRequestQueue(mContext);
         final String postUrl = "https://sandbox-api.uber.com/v1/requests";
         final String getUrl = "https://sandbox-api.uber.com/v1/requests/";
         final String putUrl = "https://sandbox-api.uber.com/v1/sandbox/requests/";
@@ -80,10 +80,10 @@ public class UberAPI {
 
         JSONObject postJson = new JSONObject();
         postJson.put("product_id", "dee8691c-8b48-4637-b048-300eee72d58d");
-        postJson.put("start_latitude", start_latitude);
-        postJson.put("start_longitude", start_longitude);
-        postJson.put("end_latitude", end_latitude);
-        postJson.put("end_longitude", end_longitude);
+        postJson.put("start_latitude", mStartLatitude);
+        postJson.put("start_longitude", mStartLongitude);
+        postJson.put("end_latitude", mEndLatitude);
+        postJson.put("end_longitude", mEndLongitude);
 
         JSONObject putJson = new JSONObject();
         putJson.put("status", "accepted");
@@ -93,7 +93,7 @@ public class UberAPI {
             public void onSuccess(Object result) throws JSONException {
                 final JSONObject finalResult = (JSONObject) result;
                 Log.d("CALL_UBULANCE", "[SUCCESS] Final Result : " + finalResult.toString());
-                callBack.onSuccess(finalResult);
+                mCallback.onSuccess(finalResult);
             }
 
             @Override

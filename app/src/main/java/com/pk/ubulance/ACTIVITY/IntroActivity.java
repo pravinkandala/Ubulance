@@ -21,8 +21,6 @@ public class IntroActivity extends MaterialIntroActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-//        this.requestWindowFeature(Window.FEATURE_NO_TITLE);
-
 
         addSlide(new SlideFragmentBuilder()
                         .backgroundColor(R.color.colorPrimaryDark)
@@ -31,7 +29,7 @@ public class IntroActivity extends MaterialIntroActivity {
                         .neededPermissions(new String[]{Manifest.permission.ACCESS_FINE_LOCATION, Manifest.permission.INTERNET})
                         .image(R.drawable.ic_ubulance_intro)
                         .title("One touch ride to the hospital")
-                        .description("In an emergency, an ambulance may take upwards of 20 minutes to arrive, but there is probably an Uber right around the corner...")
+                        .description("Disclaimer: Call 911, If its really serious emergency.")
                         .build(),
                 new MessageButtonBehaviour(new View.OnClickListener() {
                     @Override
@@ -55,20 +53,5 @@ public class IntroActivity extends MaterialIntroActivity {
                 }, "Book Uber")
         );
 
-//        Thread loading = new Thread() {
-//            public void run() {
-//                try {
-//                    sleep(SPLASH_DISPLAY_LENGTH);
-//                    Intent main = new Intent(IntroActivity.this, MainActivity.class);
-//                    startActivity(main);
-//                } catch (Exception e) {
-//                    e.printStackTrace();
-//                } finally {
-//                    finish();
-//                }
-//            }
-//        };
-//
-//        loading.start();
     }
 }

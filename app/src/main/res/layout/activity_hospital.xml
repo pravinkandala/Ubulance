@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<android.support.design.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/activity_nearest_hospital"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context="com.pk.ubulance.Activity.HospitalActivity"
+    tools:mContext="com.pk.ubulance.Activity.HospitalActivity"
     android:background="@color/background">
 
     <LinearLayout
@@ -14,17 +14,6 @@
         android:orientation="vertical"
         android:layout_weight="1"
         android:id="@+id/header">
-
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:text="Select Hospital"
-            android:textSize="40dp"
-            android:layout_weight="1"
-            android:layout_marginBottom="10dp"
-            android:gravity="center"
-            android:textColor="#FFFFFF"
-            android:id="@+id/textview"/>
 
         <fr.castorflex.android.smoothprogressbar.SmoothProgressBar
             xmlns:android="http://schemas.android.com/apk/res/android"
@@ -71,4 +60,4 @@
     </LinearLayout>
 
 
-</LinearLayout>
+</android.support.design.widget.CoordinatorLayout>

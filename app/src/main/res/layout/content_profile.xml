@@ -17,9 +17,10 @@
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:padding="@dimen/activity_horizontal_margin"
             android:background="?attr/selectableItemBackground"
-            android:clickable="true"
-            android:padding="@dimen/activity_horizontal_margin">
+            android:clickable="true">
+
 
             <ImageView
                 android:id="@+id/ivContactItem1"
@@ -27,18 +28,18 @@
                 android:layout_height="wrap_content"
                 android:layout_centerVertical="true"
                 android:layout_marginEnd="@dimen/activity_horizontal_margin"
-                android:src="@drawable/ic_phone_black"
-                android:layout_marginRight="@dimen/activity_horizontal_margin" />
+                android:layout_marginRight="@dimen/activity_horizontal_margin"
+                android:src="@drawable/ic_phone_black"/>
 
             <TextView
                 android:id="@+id/driver_phone_tv"
+                android:text="(999) 999-9999"
+                android:textColor="#212121"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="@dimen/activity_horizontal_margin"
                 android:layout_toEndOf="@id/ivContactItem1"
-                android:text="(999) 999-9999"
                 android:textAppearance="@style/TextAppearance.AppCompat.Medium"
-                android:textColor="#212121"
                 android:layout_marginLeft="@dimen/activity_horizontal_margin"
                 android:layout_toRightOf="@id/ivContactItem1" />
 
@@ -62,9 +63,9 @@
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:padding="@dimen/activity_horizontal_margin"
             android:background="?attr/selectableItemBackground"
-            android:clickable="true"
-            android:padding="@dimen/activity_horizontal_margin">
+            android:clickable="true">
 
             <ImageView
                 android:id="@+id/ivContactItem3"
@@ -72,63 +73,63 @@
                 android:layout_height="wrap_content"
                 android:layout_centerVertical="true"
                 android:layout_marginEnd="@dimen/activity_horizontal_margin"
-                android:src="@drawable/ic_local_taxi_black"
-                android:layout_marginRight="@dimen/activity_horizontal_margin" />
+                android:layout_marginRight="@dimen/activity_horizontal_margin"
+                android:src="@drawable/ic_local_taxi_black"/>
 
             <TextView
-                android:id="@+id/tvNumber3"
+                android:id="@+id/tvVehicleTitle"
+                android:text="Vehicle"
+                android:textColor="#212121"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="@dimen/activity_horizontal_margin"
                 android:layout_toEndOf="@id/ivContactItem3"
                 android:ellipsize="end"
                 android:maxLines="1"
-                android:text="Vehicle"
                 android:textAppearance="@style/TextAppearance.AppCompat.Medium"
-                android:textColor="#212121"
                 android:layout_marginLeft="@dimen/activity_horizontal_margin"
                 android:layout_toRightOf="@id/ivContactItem3"
                 />
 
             <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_below="@id/tvNumber3"
-                android:layout_marginStart="@dimen/activity_horizontal_margin"
-                android:layout_marginTop="8dp"
-                android:layout_toEndOf="@id/ivContactItem3"
                 android:id="@+id/vehicle_model_tv"
                 android:text="Model: "
-                android:textAppearance="@style/TextAppearance.AppCompat.Small"
                 android:textColor="#727272"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/tvVehicleTitle"
+                android:layout_toEndOf="@id/ivContactItem3"
+                android:layout_marginStart="@dimen/activity_horizontal_margin"
+                android:textAppearance="@style/TextAppearance.AppCompat.Small"
+                android:layout_marginTop="8dp"
                 android:layout_marginLeft="@dimen/activity_horizontal_margin"
                 android:layout_toRightOf="@id/ivContactItem3" />
 
             <TextView
+                android:id="@+id/vehicle_make_tv"
+                android:text="Make: "
+                android:textColor="#727272"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_below="@id/vehicle_model_tv"
                 android:layout_marginStart="@dimen/activity_horizontal_margin"
-                android:layout_marginTop="8dp"
                 android:layout_toEndOf="@id/ivContactItem3"
-                android:id="@+id/vehicle_make_tv"
-                android:text="Make: "
+                android:layout_marginTop="8dp"
                 android:textAppearance="@style/TextAppearance.AppCompat.Small"
-                android:textColor="#727272"
                 android:layout_marginLeft="@dimen/activity_horizontal_margin"
                 android:layout_toRightOf="@id/ivContactItem3" />
 
             <TextView
+                android:id="@+id/vehicle_plate_tv"
+                android:text="Licence Plate: "
+                android:textColor="#727272"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_below="@id/vehicle_make_tv"
                 android:layout_marginStart="@dimen/activity_horizontal_margin"
                 android:layout_marginTop="8dp"
                 android:layout_toEndOf="@id/ivContactItem3"
-                android:id="@+id/vehicle_plate_tv"
-                android:text="Licence Plate: "
                 android:textAppearance="@style/TextAppearance.AppCompat.Small"
-                android:textColor="#727272"
                 android:layout_marginLeft="@dimen/activity_horizontal_margin"
                 android:layout_toRightOf="@id/ivContactItem3" />
 
@@ -140,9 +141,9 @@
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="?attr/selectableItemBackground"
+            android:padding="@dimen/activity_horizontal_margin"
             android:clickable="true"
-            android:padding="@dimen/activity_horizontal_margin">
+            android:background="?attr/selectableItemBackground">
 
             <ImageView
                 android:id="@+id/ivContactItem5"
@@ -150,33 +151,33 @@
                 android:layout_height="wrap_content"
                 android:layout_centerVertical="true"
                 android:layout_marginEnd="@dimen/activity_horizontal_margin"
-                android:src="@drawable/ic_local_hospital_black"
-                android:layout_marginRight="@dimen/activity_horizontal_margin" />
+                android:layout_marginRight="@dimen/activity_horizontal_margin"
+                android:src="@drawable/ic_local_hospital_black"/>
 
             <TextView
                 android:id="@+id/hospital_address_tv"
+                android:text="Hospital Address"
+                android:textColor="#212121"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="@dimen/activity_horizontal_margin"
                 android:layout_toEndOf="@id/ivContactItem5"
                 android:ellipsize="end"
                 android:maxLines="1"
-                android:text="Hospital Address"
                 android:textAppearance="@style/TextAppearance.AppCompat.Medium"
-                android:textColor="#212121"
                 android:layout_marginLeft="@dimen/activity_horizontal_margin"
                 android:layout_toRightOf="@id/ivContactItem5" />
 
             <TextView
+                android:text="Hospital"
+                android:textColor="#727272"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_below="@id/hospital_address_tv"
                 android:layout_marginStart="@dimen/activity_horizontal_margin"
                 android:layout_marginTop="8dp"
                 android:layout_toEndOf="@id/ivContactItem5"
-                android:text="Hospital"
                 android:textAppearance="@style/TextAppearance.AppCompat.Small"
-                android:textColor="#727272"
                 android:layout_marginLeft="@dimen/activity_horizontal_margin"
                 android:layout_toRightOf="@id/ivContactItem5" />
 
@@ -195,36 +196,35 @@
                 android:layout_height="wrap_content"
                 android:layout_centerVertical="true"
                 android:layout_marginEnd="@dimen/activity_horizontal_margin"
-                android:src="@drawable/ic_location_on_black"
-                android:visibility="visible"
-                android:layout_marginRight="@dimen/activity_horizontal_margin" />
+                android:layout_marginRight="@dimen/activity_horizontal_margin"
+                android:src="@drawable/ic_location_on_black"/>
 
             <TextView
                 android:id="@+id/user_location"
+                android:text="Your location goes here"
+                android:textColor="#212121"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="@dimen/activity_horizontal_margin"
                 android:layout_toEndOf="@id/ivContactItem6"
+                android:layout_toRightOf="@id/ivContactItem6"
                 android:ellipsize="end"
                 android:maxLines="1"
-                android:text="Your location goes here"
-                android:textAppearance="@style/TextAppearance.AppCompat.Medium"
-                android:textColor="#212121"
                 android:layout_marginLeft="@dimen/activity_horizontal_margin"
-                android:layout_toRightOf="@id/ivContactItem6" />
+                android:textAppearance="@style/TextAppearance.AppCompat.Medium"/>
 
             <TextView
+                android:text="Your Location"
+                android:textColor="#727272"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_below="@id/user_location"
                 android:layout_marginStart="@dimen/activity_horizontal_margin"
                 android:layout_marginTop="8dp"
                 android:layout_toEndOf="@id/ivContactItem6"
-                android:text="Your Location"
-                android:textAppearance="@style/TextAppearance.AppCompat.Small"
-                android:textColor="#727272"
                 android:layout_marginLeft="@dimen/activity_horizontal_margin"
-                android:layout_toRightOf="@id/ivContactItem6" />
+                android:layout_toRightOf="@id/ivContactItem6"
+                android:textAppearance="@style/TextAppearance.AppCompat.Small"/>
 
 
         </RelativeLayout>

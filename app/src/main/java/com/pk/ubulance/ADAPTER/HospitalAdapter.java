@@ -10,10 +10,10 @@ import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.bumptech.glide.Glide;
 import com.pk.ubulance.Activity.DisplayDriverActivity;
 import com.pk.ubulance.Model.Place;
 import com.pk.ubulance.R;
-import com.squareup.picasso.Picasso;
 
 import java.util.List;
 
@@ -41,7 +41,7 @@ public class HospitalAdapter extends ArrayAdapter<Place> {
         // Populate the data into the template view using the data object
         placeName.setText(place.getName());
         vicinity.setText(place.getVicinity());
-        Picasso.with(getContext()).load(place.getIcon()).into(icon);
+        Glide.with(getContext()).load(place.getIcon()).into(icon);
 
         convertView.setOnClickListener(new View.OnClickListener() {
             @Override

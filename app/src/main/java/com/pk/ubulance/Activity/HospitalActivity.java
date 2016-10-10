@@ -1,10 +1,14 @@
 package com.pk.ubulance.Activity;
 
-import android.app.Activity;
 import android.content.Context;
 import android.graphics.Color;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.support.design.widget.CoordinatorLayout;
+import android.support.design.widget.Snackbar;
+import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.ListView;
 
@@ -19,32 +23,49 @@ import java.util.List;
 import fr.castorflex.android.smoothprogressbar.SmoothProgressBar;
 
 
-public class HospitalActivity extends Activity {
+public class HospitalActivity extends AppCompatActivity {
 
-    double longitude;
-    double latitude;
-    ListView hostpitalListView;
-    private SmoothProgressBar progressBar;
+    double mLongitude;
+    double mLatitude;
+    ListView mHospitalListView;
+    private SmoothProgressBar mProgressBar;
+    CoordinatorLayout mCoordinatorLayout;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_hospital);
 
-        progressBar = (SmoothProgressBar) findViewById(R.id.progressBar);
-        hostpitalListView = (ListView) findViewById(R.id.hostpitalList);
+        getSupportActionBar().setTitle("Ubulance");
+        getSupportActionBar().setSubtitle("Hospitals around");
+
+        mProgressBar = (SmoothProgressBar) findViewById(R.id.progressBar);
+        mHospitalListView = (ListView) findViewById(R.id.hostpitalList);
+        mCoordinatorLayout = ((CoordinatorLayout) findViewById(R.id.activity_nearest_hospital));
 
 
         //get current location
         GetLocation getLocation = new GetLocation(this);
         if (getLocation.canGetLocation()) {
-            longitude = getLocation.getLongitude();
-            latitude = getLocation.getLatitude();
+            mLongitude = getLocation.getLongitude();
+            mLatitude = getLocation.getLatitude();
         } else {
             getLocation.showSettingsAlert();
         }
 
-        new GetPlaces(this, hostpitalListView).execute();
+        mProgressBar.setVisibility(View.VISIBLE);
+        int[] color = {Color.YELLOW,Color.RED,Color.BLUE,Color.GREEN};
+        mProgressBar.setSmoothProgressDrawableColors(color);
+        mProgressBar.progressiveStart();
+
+
+        if(isNetworkAvailable()) {
+            mHospitalListView.setVisibility(View.VISIBLE);
+            new GetPlaces(this, mHospitalListView).execute();
+        }else{
+            mHospitalListView.setVisibility(View.INVISIBLE);
+            Snackbar.make(mCoordinatorLayout,"No Network. Emergency ? - Dial 911.",Snackbar.LENGTH_INDEFINITE).show();
+        }
     }
 
     @Override
@@ -55,12 +76,12 @@ public class HospitalActivity extends Activity {
 
     class GetPlaces extends AsyncTask<Void, Void, List<Place>> {
 
-        private Context context;
+        private Context mContext;
         private ListView listView;
 
-        public GetPlaces(Context context, ListView listView) {
+        public GetPlaces(Context mContext, ListView listView) {
             // TODO Auto-generated constructor stub
-            this.context = context;
+            this.mContext = mContext;
             this.listView = listView;
         }
 
@@ -70,31 +91,32 @@ public class HospitalActivity extends Activity {
             // TODO Auto-generated method stub
             super.onPostExecute(result);
 
-            HospitalAdapter adapter = new HospitalAdapter(context,result);
+            HospitalAdapter adapter = new HospitalAdapter(mContext,result);
             listView.setAdapter(adapter);
-            progressBar.progressiveStop();
-            progressBar.setVisibility(View.INVISIBLE);
+            mProgressBar.progressiveStop();
+            mProgressBar.setVisibility(View.INVISIBLE);
         }
 
         @Override
         protected void onPreExecute() {
             // TODO Auto-generated method stub
             super.onPreExecute();
-            progressBar.setVisibility(View.VISIBLE);
-            int[] color = {Color.YELLOW,Color.RED,Color.BLUE,Color.GREEN};
-            progressBar.setSmoothProgressDrawableColors(color);
-            progressBar.progressiveStart();
-
         }
 
         @Override
         protected List<Place> doInBackground(Void... arg0) {
             // TODO Auto-generated method stub
             PlacesService service = new PlacesService(getString(R.string.googleToken));
-            return service.findPlaces(latitude, longitude, "hospital");  // hospital for hospital
+            return service.findPlaces(mLatitude, mLongitude, "hospital");  // hospital for hospital
         }
 
 
+    }
+    private boolean isNetworkAvailable() {
+        ConnectivityManager connectivityManager
+                = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
+        NetworkInfo activeNetworkInfo = connectivityManager.getActiveNetworkInfo();
+        return activeNetworkInfo != null && activeNetworkInfo.isConnected();
     }
 
 
