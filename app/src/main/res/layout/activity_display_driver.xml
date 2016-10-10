@@ -1,16 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
 <android.support.design.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/activity_driver_screen"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:fitsSystemWindows="true"
-    android:id="@+id/activity_driver_screen">
+    android:fitsSystemWindows="true">
 
     <android.support.design.widget.AppBarLayout
         android:id="@+id/app_bar"
         android:layout_width="match_parent"
         android:layout_height="218dp"
-        android:background="@color/colorPrimary"
+        android:background="@color/background"
         android:theme="@style/AppTheme.AppBarOverlay">
 
         <android.support.design.widget.CollapsingToolbarLayout
@@ -23,65 +23,71 @@
             app:expandedTitleMarginStart="48dp"
             app:layout_scrollFlags="scroll|exitUntilCollapsed">
 
-           <LinearLayout
-               android:layout_width="match_parent"
-               android:layout_height="match_parent"
-               android:orientation="horizontal">
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:orientation="horizontal"
-                android:layout_gravity="center"
-                android:layout_margin="20dp"
-                android:layout_weight="1"
-                android:id="@+id/image_holder_layout">
-            <ImageView
-                android:id="@+id/toggle_iv"
-                android:layout_width="150dp"
-                android:layout_height="150dp"
-                android:adjustViewBounds="true"
-                app:layout_collapseMode="parallax"
-                android:layout_weight="1"
-                android:onClick="toggleImage"
-                app:layout_collapseParallaxMultiplier="0.7" />
-            </LinearLayout>
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:orientation="vertical"
-                android:layout_marginTop="20dp"
-                android:layout_weight="1">
+                android:orientation="horizontal">
 
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Status: Accepted"
-                    android:textSize="20sp"
-                    android:id="@+id/status_tv"/>
+                <LinearLayout
+                    android:id="@+id/image_holder_layout"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_gravity="center"
+                    android:layout_margin="20dp"
+                    android:layout_weight="1"
+                    android:orientation="horizontal">
 
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="5dp"
-                    android:text="Driver: John Man"
-                    android:id="@+id/driver_name_tv"/>
+                    <ImageView
+                        android:id="@+id/toggle_iv"
+                        android:layout_width="150dp"
+                        android:layout_height="150dp"
+                        android:layout_weight="1"
+                        android:adjustViewBounds="true"
+                        android:onClick="toggleImage"
+                        app:layout_collapseMode="parallax"
+                        app:layout_collapseParallaxMultiplier="0.7" />
+                </LinearLayout>
 
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="rating: 4.5"
-                    android:id="@+id/driver_rating_tv"/>
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
                     android:layout_marginTop="20dp"
-                    android:text="ETA: 2mins"
-                    android:id="@+id/eta_tv"/>
+                    android:layout_weight="1"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:id="@+id/status_tv"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Status: Accepted"
+                        android:textColor="@color/colorBlack"
+                        android:textSize="20sp" />
+
+                    <TextView
+                        android:id="@+id/driver_name_tv"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="5dp"
+                        android:text="Driver: John Man"
+                        android:textColor="@color/colorBlack" />
+
+                    <TextView
+                        android:id="@+id/driver_rating_tv"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="rating: 4.5"
+                        android:textColor="@color/colorBlack" />
+
+                    <TextView
+                        android:id="@+id/eta_tv"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="20dp"
+                        android:text="ETA: 2mins"
+                        android:textColor="@color/colorBlack" />
+                </LinearLayout>
 
             </LinearLayout>
-
-           </LinearLayout>
 
             <android.support.v7.widget.Toolbar
                 android:id="@+id/toolbar"

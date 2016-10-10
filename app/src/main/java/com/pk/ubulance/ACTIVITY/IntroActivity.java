@@ -24,12 +24,12 @@ public class IntroActivity extends MaterialIntroActivity {
 
         addSlide(new SlideFragmentBuilder()
                         .backgroundColor(R.color.colorPrimaryDark)
-                        .buttonsColor(R.color.colorAccent)
+                        .buttonsColor(R.color.background)
                         .possiblePermissions(new String[]{Manifest.permission.CALL_PHONE, Manifest.permission.ACCESS_COARSE_LOCATION})
                         .neededPermissions(new String[]{Manifest.permission.ACCESS_FINE_LOCATION, Manifest.permission.INTERNET})
                         .image(R.drawable.ic_ubulance_intro)
                         .title("One touch ride to the hospital")
-                        .description("Disclaimer: Call 911, If its really serious emergency.")
+                        .description("Disclaimer: If it's real emergency, call 911 ")
                         .build(),
                 new MessageButtonBehaviour(new View.OnClickListener() {
                     @Override

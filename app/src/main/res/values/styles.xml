@@ -11,4 +11,9 @@
     <style name="AppTheme.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
     <style name="AppTheme.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" />
 
+    <style name="Theme.Intro.Custom" parent="Theme.AppCompat.NoActionBar">
+        <item name="android:windowBackground">@color/transperantBackground</item>
+        <item name="android:windowIsTranslucent">true</item>
+    </style>
+
 </resources>

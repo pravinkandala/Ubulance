@@ -1,9 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="colorPrimary">#3F51B5</color>
+    <color name="colorPrimary">#2196f3</color>
     <color name="colorPrimaryDark">#303F9F</color>
-    <color name="colorAccent">#FF4081</color>
-    <color name="background">#A1FF3300</color>
+    <color name="colorAccent">#f52c33</color>
+    <color name="background">#FFE365</color>
+    <color name="colorRed">#FF3303</color>
+    <color name="colorBlack">#000000</color>
+    <color name="transperantBackground">#99FFE365</color>
     <string-array name="fourColors">
         <item>#FFEF5D</item>
         <item>#FF3303</item>

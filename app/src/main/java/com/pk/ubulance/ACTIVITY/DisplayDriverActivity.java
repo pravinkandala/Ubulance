@@ -41,6 +41,8 @@ public class DisplayDriverActivity extends AppCompatActivity {
     private Context mContext;
     private CoordinatorLayout mCoordinatorLayout;
 
+    private Boolean mWorkOnProcess = false;
+
     @BindView(R.id.driver_name_tv)
     TextView mDriverNameTV;
     @BindView(R.id.driver_rating_tv)
@@ -56,7 +58,7 @@ public class DisplayDriverActivity extends AppCompatActivity {
     @BindView(R.id.vehicle_plate_tv)
     TextView mVehiclePlateTV;
     @BindView(R.id.hospital_address_tv)
-    TextView mHostpitalAddressTV;
+    TextView mHospitalAddressTV;
     @BindView(R.id.driver_phone_tv)
     TextView mDriverPhoneTV;
     @BindView(R.id.toggle_iv)
@@ -82,7 +84,7 @@ public class DisplayDriverActivity extends AppCompatActivity {
         mVehicleMakeTV = ((TextView) findViewById(R.id.vehicle_make_tv));
         mVehicleModelTV = ((TextView) findViewById(R.id.vehicle_model_tv));
         mVehiclePlateTV = ((TextView) findViewById(R.id.vehicle_plate_tv));
-        mHostpitalAddressTV = (TextView) findViewById(R.id.hospital_address_tv);
+        mHospitalAddressTV = (TextView) findViewById(R.id.hospital_address_tv);
         mToggleIV = ((ImageView) findViewById(R.id.toggle_iv));
 
 
@@ -97,7 +99,7 @@ public class DisplayDriverActivity extends AppCompatActivity {
         Intent intent = this.getIntent();
         Double mEndLatitude = intent.getDoubleExtra("mEndLatitude", 0.0);
         Double mEndLongitude = intent.getDoubleExtra("mEndLongitude", 0.0);
-        mHostpitalAddressTV.setText(intent.getStringExtra("vicinity"));
+        mHospitalAddressTV.setText(intent.getStringExtra("vicinity"));
 
         if (mEndLatitude != 0.0 || mEndLongitude != 0.0) {
             this.mEndLatitude = Double.toString(mEndLatitude);
@@ -106,7 +108,9 @@ public class DisplayDriverActivity extends AppCompatActivity {
 
         if (isNetworkAvailable()) {
             UberAPI uberAPI = new UberAPI();
+            mWorkOnProcess = true;
             try {
+
                 uberAPI.callUbulance(this, mStartLatitude, mStartLongitude, this.mEndLatitude, this.mEndLongitude, new ServerCallBack() {
                     @Override
                     public void onSuccess(Object result) throws JSONException {
@@ -160,11 +164,13 @@ public class DisplayDriverActivity extends AppCompatActivity {
                         mVehicleMakeTV.setText("Make: " + vehicle.getString("make"));
                         mVehicleModelTV.setText("Model: " + vehicle.getString("model"));
                         mVehiclePlateTV.setText("Licence Plate: " + vehicle.getString("license_plate"));
+
+                        mWorkOnProcess = false;
                     }
 
                     @Override
                     public void onFailure(Boolean bool) {
-
+                        mWorkOnProcess = false;
                     }
                 });
             } catch (JSONException e) {
@@ -173,7 +179,6 @@ public class DisplayDriverActivity extends AppCompatActivity {
         } else {
             Snackbar.make(mCoordinatorLayout, "No Internet. Please dial 911, if its emergency or try again later", Snackbar.LENGTH_LONG).show();
         }
-
 
 
     }
@@ -211,7 +216,12 @@ public class DisplayDriverActivity extends AppCompatActivity {
 
     @Override
     public void onBackPressed() {
-        finish();
+        if(mWorkOnProcess){
+            Snackbar.make(mCoordinatorLayout, "Loading components...", Snackbar.LENGTH_LONG).show();
+        }else {
+            super.onBackPressed();
+            finish();
+        }
     }
 }
 
