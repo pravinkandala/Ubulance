@@ -1,4 +1,5 @@
 # Ubulance - The Uber Ambulance
+
 In an Emergency, Ambulance can sometimes take 20mins to reach you, but there is probably an Uber right around you.
 
 By ordering an uber from ubulance, driver will directly take you to the hospital near you.
@@ -13,8 +14,9 @@ JVM: OpenJDK 64-Bit Server VM by JetBrains s.r.o
 
 Works on Android Sdk Version - 15 to 24
 
+
 ## Screen Shots
-<img src="https://raw.github.com/pravinkandala/Ubulance/master/Screens/Screen1.png" width="180" />
+<img src="https://raw.github.com/pravinkandala/Ubulance/master/Screens/Screen1.jpg" width="180" />
 
 
 <img src="https://raw.github.com/pravinkandala/Ubulance/master/Screens/Screen2.png" width="180" />
@@ -23,13 +25,7 @@ Works on Android Sdk Version - 15 to 24
 <img src="https://raw.github.com/pravinkandala/Ubulance/master/Screens/Screen3.png" width="180" />
 
 
-<img src="https://raw.github.com/pravinkandala/Ubulance/master/Screens/Screen4.png" width="180" />
-
-
-<img src="https://raw.github.com/pravinkandala/Ubulance/master/Screens/Screen5.png" width="180" />
-
-
-##Idea:
+## Idea
 
 [![Ubulance - Jimmy Kimmel](https://img.youtube.com/vi/uyeJE2vMSLE/0.jpg)](https://www.youtube.com/watch?v=uyeJE2vMSLE)
 
