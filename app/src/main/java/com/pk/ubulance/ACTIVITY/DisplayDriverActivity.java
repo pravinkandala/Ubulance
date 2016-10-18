@@ -1,6 +1,7 @@
 package com.pk.ubulance.Activity;
 
 import android.Manifest;
+import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
@@ -53,6 +54,7 @@ public class DisplayDriverActivity extends AppCompatActivity {
     private CoordinatorLayout mCoordinatorLayout;
 
     private Boolean mWorkOnProcess = false;
+    private ProgressDialog mDialog;
 
     @BindView(R.id.driver_name_tv)
     TextView mDriverNameTV;
@@ -94,6 +96,7 @@ public class DisplayDriverActivity extends AppCompatActivity {
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         mCoordinatorLayout = (CoordinatorLayout) findViewById(R.id.activity_driver_screen);
 
+        mDialog = ProgressDialog.show(this, "", "Booking Ubulance, Please wait...", true);
 //        callIntent = new Intent(Intent.ACTION_CALL);
 
 
@@ -206,10 +209,10 @@ public class DisplayDriverActivity extends AppCompatActivity {
 
                                 try {
                                     if (toggle) {
-                                        displayDriverImage(mContext, driver.getString("picture_url"));
+                                        Glide.with(mContext).load(vehicle.getString("picture_url")).into(mToggleIV);
                                         toggle = false;
                                     } else {
-                                        Glide.with(mContext).load(vehicle.getString("picture_url")).into(mToggleIV);
+                                        displayDriverImage(mContext, driver.getString("picture_url"));
                                         toggle = true;
                                     }
 
@@ -227,6 +230,7 @@ public class DisplayDriverActivity extends AppCompatActivity {
                         mVehiclePlateTV.setText("Licence Plate: " + vehicle.getString("license_plate"));
 
                         mWorkOnProcess = false;
+                        mDialog.dismiss();
                     }
 
                     @Override
